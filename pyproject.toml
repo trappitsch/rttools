@@ -9,7 +9,7 @@ author-email = "reto@galactic-forensics.space"
 home-page = "https://github.com/trappitsch/rttools"
 requires = ["numpy"]
 requires-python=">=3.6"
-description-file="README.rst"
+description-file="README.md"
 
 [tool.flit.metadata.requires-extra]
 dev = [

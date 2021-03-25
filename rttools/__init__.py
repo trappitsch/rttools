@@ -1,6 +1,8 @@
 """Tools for my own research projects - an assortment."""
 
 # imports
+from . import linreg
+from . import utils
 
 # Package information
 __version__ = "0.0.1"
