@@ -1,6 +1,7 @@
 """Tools for my own research projects - an assortment."""
 
 # imports
+from . import latex
 from . import linreg
 from . import utils
 
