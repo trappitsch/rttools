@@ -3,6 +3,7 @@
 # imports
 from . import latex
 from . import linreg
+from . import peirce
 from . import utils
 
 # Package information
