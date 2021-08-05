@@ -8,7 +8,7 @@ from rttools import peirce
 
 def test_peirce_ross_2003_example():
     """Run example in Ross (2003) through Peirce criterion."""
-    data = np.array([101.2, 90, 99, 102, 103, 100.2, 89, 98.1, 101.5, 102])
+    data = np.array([102.2, 90, 99, 102, 103, 100.2, 89, 98.1, 101.5, 102])
     outliers_exp = np.array([89, 90])
     avg_exp = 100.9
     std_exp = 1.66
