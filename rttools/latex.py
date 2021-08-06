@@ -1,6 +1,6 @@
 """Tools for LaTeX formatting, e.g., of isotope strings, etc."""
 
-from typing import Tuple
+from typing import Tuple, Union
 
 
 def delta_iso(iso1: str, iso2: str, full=False) -> str:
@@ -32,6 +32,29 @@ def delta_iso(iso1: str, iso2: str, full=False) -> str:
     return ret_val
 
 
+def iso_transformer(iso: str):
+    """Transform isotope from `46Ti` notation to `Ti-46` notation and vice verse.
+
+    Transformation direction is automatically determined by input.
+
+    :param iso: Isotope as string
+
+    :return: iso, but in transformed notation
+    """
+    if "-" in iso:
+        iso = iso.split("-")
+        return f"{iso[1]}{iso[0]}"
+    else:
+        index_to = None
+        for it, number in enumerate(iso):
+            try:
+                int(number)
+            except ValueError:
+                index_to = it
+                break
+        return f"{iso[index_to:]}-{iso[:index_to]}"
+
+
 def ratio_iso(iso1: str, iso2: str) -> str:
     """Return LaTeX formatted string for ratio of two isotopes.
 
@@ -48,14 +71,21 @@ def ratio_iso(iso1: str, iso2: str) -> str:
     return ret_val
 
 
-def split_iso(iso: str) -> Tuple[str, int]:
+def split_iso(iso: str) -> Tuple[str, Union[int, str]]:
     """Split isotope string into element name and mass number.
 
     :param iso: Isotope name, e.g., "Si-28"
     :type iso: str
 
-    :return: Isotope name, mass number
-    :rtype: Tuple[str, int]
+    :return: Isotope name, mass number (as int if possible)
     """
+    # transform to correct format if necessary
+    if not "-" in iso:
+        iso = iso_transformer(iso)
+
     ele, aa = iso.split("-")
-    return ele, int(aa)
+    try:
+        aa = int(aa)
+    except ValueError:
+        pass
+    return ele, aa

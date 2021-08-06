@@ -13,6 +13,14 @@ def test_delta_iso():
     assert latex.delta_iso(iso1, iso2, full=True) == exp_full
 
 
+def test_isotope_transformer():
+    """Transform notation of isotopes back and forth, e.g., `46Ti` <-> `Ti-46`."""
+    not1 = "46Ti"
+    not2 = "Ti-46"
+    assert latex.iso_transformer(not1) == not2
+    assert latex.iso_transformer(not2) == not1
+
+
 def test_ratio_iso():
     """Check if isotope ratio is returned properly."""
     iso1 = "Si-30"
@@ -24,4 +32,10 @@ def test_ratio_iso():
 def test_split_iso():
     """Split isotope given as string into element name and mass number."""
     iso = "Si-28"
+    assert latex.split_iso(iso) == ("Si", 28)
+
+
+def test_split_iso_other_notation():
+    """Accept different notation `46Ti` for isotope splitter."""
+    iso = "28Si"
     assert latex.split_iso(iso) == ("Si", 28)
