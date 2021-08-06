@@ -69,12 +69,24 @@ def corr_error_bars(
         xdat_x = [xpos - dx_x, xpos + dx_x]
         ydat_x = [ypos - dy_x, ypos + dy_x]
         ax.plot(
-            xdat_x, ydat_x, marker=marker, linestyle=linestyle, color=color, **kwargs
+            xdat_x,
+            ydat_x,
+            marker=marker,
+            linestyle=linestyle,
+            color=color,
+            linewidth=linewidth,
+            **kwargs
         )
 
         # plot the y error bar
         xdat_y = [xpos - dx_y, xpos + dx_y]
         ydat_y = [ypos - dy_y, ypos + dy_y]
         ax.plot(
-            xdat_y, ydat_y, marker=marker, linestyle=linestyle, color=color, **kwargs
+            xdat_y,
+            ydat_y,
+            marker=marker,
+            linestyle=linestyle,
+            color=color,
+            linewidth=linewidth,
+            **kwargs
         )
