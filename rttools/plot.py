@@ -16,6 +16,8 @@ def corr_error_bars(
     linewidth: float = 0.5,
     marker: str = "None",
     color: str = "tab:blue",
+    label: str = None,
+    zorder: int = 10,
     **kwargs
 ) -> None:
     """Plot correlated error bars on a given axes.
@@ -37,6 +39,8 @@ def corr_error_bars(
     :param marker: Matplotlib Marker, defaults to 'None'. Note: These would be the end
         markers of the line, not a marker in the middle!
     :param color: Matplotlib color, defaults to 'tab:blue'
+    :param label: Label for data, only used if marker is not None.
+    :param zorder: Some value to define order.
 
     :return: None
     """
@@ -55,7 +59,14 @@ def corr_error_bars(
         lam2 = tr_cov / 2 - np.sqrt((tr_cov / 2) ** 2 - det_cov)
 
         # calculate the rotation of the error bars
-        phi_x = np.arctan((lam1 - sig_x ** 2) / sig_xy)
+        if sig_xy == 0:
+            determinator = lam1 - sig_x ** 2.0
+            if np.isclose(determinator, 0):  # to check for numerical issues
+                phi_x = 0  # 0 divided by infinity
+            else:
+                phi_x = np.pi / 2  # not 0 divided by infinity
+        else:
+            phi_x = np.arctan((lam1 - sig_x ** 2) / sig_xy)
         phi_y = phi_x + np.pi / 2
 
         # calculate delta x and delta y for x error bar:
@@ -65,17 +76,33 @@ def corr_error_bars(
         dx_y = np.sqrt(lam2) * np.cos(phi_y)
         dy_y = np.sqrt(lam2) * np.sin(phi_y)
 
+        # plot the data if marker is not None
+        if it > 0:  # remove label
+            label = None
+        if marker is not None:
+            ax.plot(
+                xdata,
+                ydata,
+                marker=marker,
+                linestyle="None",
+                color=color,
+                label=label,
+                zorder=zorder + 1,
+                **kwargs,
+            )
+
         # plot the x error bar
         xdat_x = [xpos - dx_x, xpos + dx_x]
         ydat_x = [ypos - dy_x, ypos + dy_x]
         ax.plot(
             xdat_x,
             ydat_x,
-            marker=marker,
+            marker="None",
             linestyle=linestyle,
             color=color,
             linewidth=linewidth,
-            **kwargs
+            zorder=zorder,
+            **kwargs,
         )
 
         # plot the y error bar
@@ -84,9 +111,10 @@ def corr_error_bars(
         ax.plot(
             xdat_y,
             ydat_y,
-            marker=marker,
+            marker="None",
             linestyle=linestyle,
             color=color,
             linewidth=linewidth,
-            **kwargs
+            zorder=zorder,
+            **kwargs,
         )
