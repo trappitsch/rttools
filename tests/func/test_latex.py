@@ -1,14 +1,30 @@
 """Tests for latex.py routines."""
 
+import pytest
+
 import rttools.latex as latex
+
+
+@pytest.mark.parametrize(
+    "value",
+    [
+        [(3.12, 2), "$3.12 \\times 10^{0}$"],
+        [(0.004256854, 2), "$4.26 \\times 10^{-3}$"],
+    ],
+)
+def test_exp_notation(value):
+    """TUrn number into exponential notation LaTeX string."""
+    num, prec = value[0]
+    expected = value[1]
+    assert latex.exp_notation(num, prec) == expected
 
 
 def test_delta_iso():
     """Check if delta notation is returned properly."""
     iso1 = "Si-30"
     iso2 = "Si-28"
-    exp_short = "$\\delta{^{30}}\\mathrm{Si}_{28}$"
-    exp_full = "$\\delta({^{30}}\\mathrm{Si}/{^{28}}\\mathrm{Si})$"
+    exp_short = "$\\delta{^{30}}\\mathrm{Si}_{28}$ (‰)"
+    exp_full = "$\\delta({^{30}}\\mathrm{Si}/{^{28}}\\mathrm{Si})$ (‰)"
     assert latex.delta_iso(iso1, iso2) == exp_short  # default
     assert latex.delta_iso(iso1, iso2, full=True) == exp_full
 

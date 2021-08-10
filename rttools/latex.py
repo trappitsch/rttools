@@ -1,6 +1,22 @@
 """Tools for LaTeX formatting, e.g., of isotope strings, etc."""
-
+import decimal
 from typing import Tuple, Union
+
+
+def exp_notation(num: float, prec: int = 2) -> str:
+    """Take a number and return it in LaTeX exponential notation.
+
+    :param num: Number itself.
+    :param prec: Precision.
+
+    :return: LaTeX formatted string.
+    """
+    num_str = f"{num:.{prec}E}"
+    e_index = num_str.find("E")
+    value_str = decimal.Decimal(num_str[:e_index]).normalize()
+    exp_str = decimal.Decimal(num_str[e_index + 1 :]).normalize()
+    ret_str = f"${value_str} \\times 10^{{{exp_str}}}$"
+    return ret_str
 
 
 def delta_iso(iso1: str, iso2: str, full=False) -> str:
@@ -25,10 +41,10 @@ def delta_iso(iso1: str, iso2: str, full=False) -> str:
     if full:
         ret_val = (
             f"$\\delta({{^{{{aa1}}}}}\\mathrm{{{ele1}}}"
-            f"/{{^{{{aa2}}}}}\\mathrm{{{ele2}}})$"
+            f"/{{^{{{aa2}}}}}\\mathrm{{{ele2}}})$ (‰)"
         )
     else:
-        ret_val = f"$\\delta{{^{{{aa1}}}}}\\mathrm{{{ele1}}}_{{{aa2}}}$"
+        ret_val = f"$\\delta{{^{{{aa1}}}}}\\mathrm{{{ele1}}}_{{{aa2}}}$ (‰)"
     return ret_val
 
 

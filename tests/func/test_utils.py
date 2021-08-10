@@ -36,3 +36,13 @@ def test_kron_delta_value_error():
         utils.kron_delta(arr1, arr2)
     err_msg = err_info.value.args[0]
     assert err_msg == "The inputs must have the same shape."
+
+
+@pytest.mark.parametrize(
+    "value", [[(3.0, 2), "3"], [(5.1264, 3), "5.126"], [(3.0102, 3), "3.01"]]
+)
+def test_reduce_decimal(value):
+    """Test reducing numbers with parameterized values."""
+    num, prec = value[0]
+    expected = value[1]
+    assert utils.reduce_decimal(num, prec) == expected

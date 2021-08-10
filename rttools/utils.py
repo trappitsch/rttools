@@ -1,5 +1,8 @@
 """Helper functions and utilities to be used and re-used in multiple areas."""
 
+import decimal
+from typing import Any
+
 import numpy as np
 
 
@@ -28,3 +31,15 @@ def kron_delta(ind1, ind2):
         ret_arr = np.zeros_like(ind1)
         ret_arr[np.where(ind1 == ind2)] = 1
         return ret_arr
+
+
+def reduce_decimal(num: Any, prec: int = 2) -> str:
+    """Return a given number with precision or cut trailing zeros if possible.
+
+    :param num: Number given, anything that can be turned into a decimal.
+    :param prec: given precision.
+
+    :return: Number with at most the given precision.
+    """
+    dec = decimal.Decimal(f"{num:.{prec}f}").normalize()
+    return str(dec)

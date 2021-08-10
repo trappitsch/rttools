@@ -3,6 +3,7 @@
 # imports
 from . import latex
 from . import linreg
+from . import nucmod
 from . import peirce
 from . import plot
 from . import utils
