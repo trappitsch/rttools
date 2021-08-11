@@ -228,7 +228,7 @@ def plot_mod(
 
 def reader(fname: Path) -> pd.DataFrame:
     """Read in a FRUITY file and return values as DataFrame."""
-    data = pd.read_csv(fname, sep=r"\s\s+", index_col=0)  # RegEx to find spaces
+    data = pd.read_csv(fname, sep=r" ", index_col=0, skipinitialspace=True)
 
     # drop nan columns
     data = data.dropna(axis=1, how="all")
