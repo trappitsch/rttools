@@ -33,7 +33,7 @@ def label_latex_mass_z(fname: str, prec: int = 2) -> str:
     m, z, _, _ = label_parser(fname)
     return (
         f"${reduce_decimal(m, prec)}\,M_{{\\odot}}$, "
-        f"${reduce_decimal(m, prec)}\,Z_{{\\odot}}$"
+        f"${reduce_decimal(z, prec)}\,Z_{{\\odot}}$"
     )
 
 

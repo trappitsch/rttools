@@ -2,4 +2,4 @@ git+https://github.com/galactic-forensics/iniabu.git
 numpy
 matplotlib
 pandas
-
+scipy
