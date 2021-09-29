@@ -8,12 +8,29 @@ import rttools.latex as latex
 @pytest.mark.parametrize(
     "value",
     [
+        [(0.0312, 0.001, 2), "$(3.12 \pm 0.10) \\times 10^{-2}$"],
+        [(0.004256854, 0.004256854, 2), "$(4.26 \pm 4.26) \\times 10^{-3}$"],
+        [(305.3, 2, 4), "$(3.0530 \pm 0.0200) \\times 10^{2}$"],
+        [(3.14, 0.1555, 1), "$3.1 \pm 0.2$"],
+    ],
+)
+def test_error_formatting(value):
+    """Format value plus uncertainty in LaTeX proper way."""
+    val, unc, prec = value[0]
+    expected = value[1]
+    assert latex.error_formatting(val, unc, prec) == expected
+
+
+@pytest.mark.parametrize(
+    "value",
+    [
         [(3.12, 2), "$3.12 \\times 10^{0}$"],
         [(0.004256854, 2), "$4.26 \\times 10^{-3}$"],
+        [(0.0042, 2), "$4.20 \\times 10^{-3}$"],
     ],
 )
 def test_exp_notation(value):
-    """TUrn number into exponential notation LaTeX string."""
+    """Turn number into exponential notation LaTeX string."""
     num, prec = value[0]
     expected = value[1]
     assert latex.exp_notation(num, prec) == expected
