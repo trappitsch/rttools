@@ -1,6 +1,7 @@
 """Linear fits with uncertainties in both axes according to Mahon et al. (1996)"""
 
 import numpy as np
+import scipy.stats as stats
 
 from .utils import kron_delta
 
@@ -31,6 +32,11 @@ class Mahon:
         self.xbar = None
         self.ybar = None
 
+        # confidence intervals - if calculated
+        self.ci_xax = None  # x axis values where yax ci calculated
+        self.ci_yax_pos = None  # y axis confidence interval positive
+        self.ci_yax_neg = None  # y axis confidence interval negative
+
     def calculate(self, xdat, ydat, xunc, yunc, p_corr=None, afx=None, mc=False):
         """
         Data, coefficients and intercept. All errors must be 1 sigma!!!
@@ -49,9 +55,11 @@ class Mahon:
         self.p = p_corr
         self.afx = afx
 
-        # if correlation is zero, then set p_corr accordingly
+        # if correlation is zero or just one number, then set p_corr accordingly
         if p_corr is None:
             self.p = np.zeros(len(xdat))
+        elif not isinstance(p_corr, np.ndarray):
+            self.p = np.zeros(len(xdat)) + p_corr
 
         # fixed intercept checking:
         if self.afx is not None:
@@ -102,6 +110,59 @@ class Mahon:
 
         # calculate the MSWD
         self.calcmswd()
+
+    def calculate_with_ci(
+        self,
+        xdat,
+        ydat,
+        xunc,
+        yunc,
+        p_corr=None,
+        afx=None,
+        p_conf=0.95,
+        bins=100,
+        xlims=None,
+    ):
+        """Regular linear regression, however, also calculated confidence intervals/
+
+        Data, coefficients and intercept. All errors must be 1 sigma!!! Note: the last
+        calculation that is done here is the same as when running the regular
+        `calculate` routine, however, here the CI values are also populated.
+
+        :param xdat:        <np.array>   x data
+        :param ydat:        <np.array>   y data
+        :param xunc:        <np.array>   x uncertainty, 1 sigma
+        :param yunc:        <np.array>   y uncertainty, 1 sigma
+        :param p_corr:      <np.array>   correlation coefficient, None for uncorrelated
+        :param afx:         <float>      x intercept if fixed, otherwise None
+        :param p_conf:      <float>      which confidence interval? by default 95%
+        :param bins:        <int>        How many steps for CI? defaults to 100
+        :param xlims:       <np.array>   Limits for x axis to calculate CI in. Defaults
+            to None, which will take the minimum and maximum of the axis.
+        :return:
+        """
+        if xlims is None:
+            xax_ci = np.linspace(np.min(xdat), np.max(xdat), bins)
+        else:
+            xax_ci = np.linspace(xlims[0], xlims[1], bins)
+
+        yax_ci = np.zeros(bins)
+        for it, deltax in enumerate(xax_ci):
+            xdat_tmp = xdat - deltax
+            self.calculate(xdat_tmp, ydat, xunc, yunc, p_corr=p_corr, afx=afx, mc=False)
+            yax_ci[it] = self.yinterunc
+
+        # now create the confidence interval that we need for double tailed distribution
+        zfac = stats.t.ppf(1 - (1 - p_conf) / 2.0, len(xdat) - 2)
+        yax_ci *= zfac
+
+        # finally: calculate it with the real dataset for right data in class at end
+        self.calculate(xdat, ydat, xunc, yunc, p_corr=p_corr, afx=afx, mc=False)
+
+        # set ci values
+        self.ci_xax = xax_ci
+        self.ci_yax_pos = xax_ci * self.slope + self.yinter + yax_ci
+        self.ci_yax_neg = xax_ci * self.slope + self.yinter - yax_ci
 
     def clear(self):
         self.xdat, self.xunc = None, None
