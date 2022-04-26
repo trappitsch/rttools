@@ -538,7 +538,7 @@ class Stephan:
         """Do the linear regression and save the parameters in the class variables."""
         self.slope_initial_guess()
         self.slope_calculation()
-        self._intercept = self.ybar - self._slope * self.xbar
+        self.intercept_calculation()
         self.unc_calculation()
         self.goodness_of_fit()
 
@@ -551,6 +551,10 @@ class Stephan:
 
         dof = len(self.xdat) - 2 if self.fix_pt is None else len(self.xdat) - 1
         self._mswd = chi_sq / dof
+
+    def intercept_calculation(self):
+        """Calculate the intercept."""
+        self._intercept = self.ybar - self._slope * self.xbar
 
     def slope_calculation(self):
         """Iterate the slope until it fits."""
