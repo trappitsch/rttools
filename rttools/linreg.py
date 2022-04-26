@@ -1,5 +1,5 @@
 """Linear fits with uncertainties in both axes according to Mahon et al. (1996)"""
-from typing import Tuple
+from typing import Tuple, Union
 import warnings
 
 import numpy as np
@@ -11,6 +11,10 @@ from .utils import kron_delta
 
 class Mahon:
     def __init__(self):
+        warnings.warn(
+            "This linear regression method is depreciated. Please use "
+            "`Stephan` regression instead of `Mahon`."
+        )
         # ### Loaded from calc
         # fixed intercept
         self.afx = None
@@ -427,10 +431,10 @@ class Stephan:
     def __init__(
         self,
         xdat: np.ndarray,
-        ydat: np.ndarray,
         sigx: np.ndarray,
+        ydat: np.ndarray,
         sigy: np.ndarray,
-        rho: np.ndarray = None,
+        rho: Union[float, np.ndarray] = None,
         fixpt: np.ndarray = None,
         autocalc=True,
         **kwargs,
@@ -451,8 +455,8 @@ class Stephan:
         raises ValueError: Fix point is of the wrong shape.
         """
         self.xdat = np.array(xdat)
-        self.ydat = np.array(ydat)
         self.sigx = np.array(sigx)
+        self.ydat = np.array(ydat)
         self.sigy = np.array(sigy)
         if rho is None:
             self.rho = np.zeros_like(self.xdat)
@@ -513,13 +517,13 @@ class Stephan:
     def parameters(self) -> np.ndarray:
         """Return all parameters of the linear regression.
 
-        :return: slope, intercept, slope_uncertainty, intercept_uncertainty, MSWD
+        :return: slope, slope_uncertainty, intercept, intercept_uncertainty, MSWD
         """
         return np.array(
             [
                 self._slope,
-                self._intercept,
                 self._slope_unc,
+                self._intercept,
                 self._intercept_unc,
                 self._mswd,
             ]

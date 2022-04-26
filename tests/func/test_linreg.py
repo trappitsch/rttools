@@ -46,7 +46,7 @@ def test_mahon_calculate_with_ci_setup():
 
 def test_stephan_fit_correlated():
     """Test Stephan fit with correlated Mahon data."""
-    reg = Stephan(MAHON_XDAT, MAHON_YDAT, MAHON_XDAT_UNC, MAHON_YDAT_UNC, rho=MAHON_RHO)
+    reg = Stephan(MAHON_XDAT, MAHON_XDAT_UNC, MAHON_YDAT, MAHON_YDAT_UNC, rho=MAHON_RHO)
     slope_exp = MAHON_RES_CORR[0:2]
     intercept_exp = MAHON_RES_CORR[2:4]
     mswd_exp = MAHON_RES_CORR[6]
@@ -62,7 +62,7 @@ def test_stephan_fit_correlated():
 
 def test_stephan_fit_uncorrelated():
     """Test Stephan fit with uncorrelated Mahon data."""
-    reg = Stephan(MAHON_XDAT, MAHON_YDAT, MAHON_XDAT_UNC, MAHON_YDAT_UNC)
+    reg = Stephan(MAHON_XDAT, MAHON_XDAT_UNC, MAHON_YDAT, MAHON_YDAT_UNC)
     slope_exp = MAHON_RES_UNCORR[0:2]
     intercept_exp = MAHON_RES_UNCORR[2:4]
     mswd_exp = MAHON_RES_UNCORR[6]
@@ -80,8 +80,8 @@ def test_stephan_fit_correlated_fixed():
     """Test Stephan regression with Mahon Data and Fixed intercept."""
     reg = Stephan(
         MAHON_XDAT,
-        MAHON_YDAT,
         MAHON_XDAT_UNC,
+        MAHON_YDAT,
         MAHON_YDAT_UNC,
         rho=MAHON_RHO,
         fixpt=STEPHAN_FIX_PT,
