@@ -45,6 +45,14 @@ def test_delta_iso():
     assert latex.delta_iso(iso1, iso2) == exp_short  # default
     assert latex.delta_iso(iso1, iso2, full=True) == exp_full
 
+def test_delta_iso_alternative_writing():
+    """Check if delta notation is returned properly."""
+    iso1 = "Si30"
+    iso2 = "28Si"
+    exp_short = "$\\delta{^{30}}\\mathrm{Si}_{28}$ (‰)"
+    exp_full = "$\\delta({^{30}}\\mathrm{Si}/{^{28}}\\mathrm{Si})$ (‰)"
+    assert latex.delta_iso(iso1, iso2) == exp_short  # default
+    assert latex.delta_iso(iso1, iso2, full=True) == exp_full
 
 def test_isotope_transformer():
     """Transform notation of isotopes back and forth, e.g., `46Ti` <-> `Ti-46`."""

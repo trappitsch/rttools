@@ -2,6 +2,7 @@
 import decimal
 from typing import Tuple, Union
 
+from iniabu import ini
 
 def error_formatting(value: float, unc: float, prec: int) -> str:
     """Take a value and its uncertainty and express is as a formatted LaTeX string.
@@ -61,6 +62,8 @@ def delta_iso(iso1: str, iso2: str, full=False) -> str:
     :return: LaTeX formatted label for delta value. Unit not included.
     :rtype: str
     """
+    iso1 = ini.iso[iso1].name
+    iso2 = ini.iso[iso2].name
     ele1, aa1 = split_iso(iso1)
     ele2, aa2 = split_iso(iso2)
     if full:

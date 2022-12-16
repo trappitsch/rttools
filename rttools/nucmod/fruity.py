@@ -48,11 +48,11 @@ def get_delta_isoratio(
 
     :return: Series with delta ratio of the two.
     """
-    iso1 = make_fruity_isoname(iso1)
-    iso2 = make_fruity_isoname(iso2)
+    iso1f = make_fruity_isoname(iso1)
+    iso2f = make_fruity_isoname(iso2)
 
     data = drop_a_z(reader(fname))
-    ratios = data.loc[iso1] / data.loc[iso2]
+    ratios = data.loc[iso1f] / data.loc[iso2f]
 
     if norm_self:
         delta = (ratios / ratios.iloc[0] - 1.0) * 1000
@@ -166,9 +166,9 @@ def make_fruity_isoname(iso: str) -> str:
 
     :return: FRUITY name, e.g., "Si28"
     """
-    iso = ini.iso[iso].name
-    return iso.replace("-", "")
-
+    iso = ini.iso[iso].name.split("-")
+    iso_fruity = iso[0] + iso[1][-2:]
+    return iso_fruity
 
 def plot_mod(
     ax: plt.Axes,

@@ -32,3 +32,9 @@ def test_fruity_label_parser(val):
 def test_make_fruity_isoname(iso):
     """Turn a isotope name into FRUITY specific notation."""
     assert fruity.make_fruity_isoname(iso) == "Si28"
+
+def test_make_fruity_isoname_long():
+    """Long isotope names have the first number cut off to have 4 bytes."""
+    iso = "Ce142"
+    iso_exp = "Ce42"
+    assert fruity.make_fruity_isoname(iso) == iso_exp
