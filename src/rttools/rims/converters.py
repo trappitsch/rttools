@@ -1,12 +1,37 @@
 # Useful converters for RIMS work
 
-from typing import Union
+from typing import Any, Union
 
 import numpy as np
 from numpy.typing import ArrayLike
 
 from rttools import ureg
 from rttools import utils as ut
+
+
+def power_after_window(power: Any, passes: int = 1, transmittance: float = 0.96) -> Any:
+    """Calculate power after a laser passes through a window.
+
+    Going through a window will reduce the power by transmittance**2 per pass.
+    This is because of the following:
+
+            S1      S2
+    laser   |       |
+    --------|-------|--------
+            |       |
+             window
+
+    As the simplified drawing shows, the window has an entrance and an exit surface,
+    at which the laser loses in each case `transmittance` of its total power.
+    Surfaces are labeled S1 and S2.
+
+    :param power: Initial power
+    :param passes: Number of passes through a window.
+    :param transmittance: Transmittance of the window, defaults to 0.96.
+
+    :return: Power after the `passes` passes through the window.
+    """
+    return power * transmittance ** (2 * passes)
 
 
 def power_to_irradiance(

@@ -1,5 +1,6 @@
 # Functional tests for RIMS converters
 
+import pytest
 import numpy as np
 
 import rttools.rims.converters as cvt
@@ -61,3 +62,11 @@ def test_power_to_irradiance_one_beamsize():
         ),
         irradiance_exp,
     )
+
+
+@pytest.mark.parametrize("power_before", [100.0, np.array([100.0, 200.0])])
+@pytest.mark.parametrize("passes", [1, 2, 3])
+def test_power_after_window(power_before, passes):
+    """Calculate power after n passes through a window."""
+    power_exp = power_before * 0.96 ** (2 * passes)
+    np.testing.assert_equal(cvt.power_after_window(power_before, passes), power_exp)
