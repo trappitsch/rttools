@@ -18,7 +18,7 @@ theme:
         icon: material/brightness-7
         name: Switch to dark mode
 
-# site_url: https://.readthedocs.io
+site_url: https://github.io/rttools
 repo_url: https://github.com/trappitsch/rttools
 site_author: Reto Trappitsch
 
