@@ -1,4 +1,11 @@
-"""Plot some good-looking saturation curves from measurements."""
+"""Plot some good-looking saturation curves from measurements.
+
+Import as:
+
+```python
+from rttools.rims import saturation_curve
+```
+"""
 
 from typing import Union
 
@@ -6,8 +13,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy.optimize import curve_fit
 
-from rttools import latex
-from rttools import ureg
+from rttools import latex, ureg
 
 
 def saturation_curve(

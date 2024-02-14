@@ -1,4 +1,13 @@
-"""Tools for LaTeX formatting, e.g., of isotope strings, etc."""
+"""Tools for LaTeX formatting
+
+This module contains functions for formatting numbers, isotopes, etc.
+It can be imported as `ltx` as following:
+
+```python
+from rttools import latex
+```
+"""
+
 import decimal
 from typing import Tuple, Union
 
@@ -10,7 +19,7 @@ def error_formatting(value: float, unc: float, prec: int) -> str:
 
     Scientific notation is assumed. As an example, if value is 0.0002153 and uncertainty
     is 0.00002, at a precision of 3 the formatted string would be:
-    '$(2.15 \\pm 0.20) \\times 10^{-4}$'
+    $(2.15 \\pm 0.20) \\times 10^{-4}$
 
     :param value: Value to be given
     :param unc: Uncertainty of the value

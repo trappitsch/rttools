@@ -1,10 +1,16 @@
-"""Run Pierce's criterion to reject data.
+"""Run Peirce's criterion to reject data.
 
 Implementation after Ross (2003) using calculation method for table from Wikipedia.
 Note that the table that Ross (2003) presents is for `R`, which is the square root
 of what `x**2` means in Gould (1855). Also, the first value of Ross (2003) for
 three observations, one doubtful value seems to off by a little bit. The rest of the
 table agrees well.
+
+To import:
+
+```python
+from rttools imoprt peirce
+```
 """
 
 from typing import Tuple

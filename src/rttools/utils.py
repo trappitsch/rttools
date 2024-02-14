@@ -1,4 +1,11 @@
-"""Helper functions and utilities to be used and re-used in multiple areas."""
+"""Helper functions and utilities to be used and re-used in multiple areas.
+
+Import as:
+
+```python
+from rttools import utils
+```
+"""
 
 import decimal
 from typing import Any

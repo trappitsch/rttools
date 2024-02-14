@@ -1,4 +1,14 @@
-# Useful converters for RIMS work
+"""Converters for RIMS work.
+
+This module contains converters that are conventient when working with RIMS data,
+etc.
+
+Import as:
+
+```python
+from rttools.rims import converters
+```
+"""
 
 from typing import Any, Union
 
@@ -15,11 +25,11 @@ def power_after_window(power: Any, passes: int = 1, transmittance: float = 0.96)
     Going through a window will reduce the power by transmittance**2 per pass.
     This is because of the following:
 
-            S1      S2
-    laser   |       |
-    --------|-------|--------
-            |       |
-             window
+                S1      S2
+        laser   |       |
+        --------|-------|--------
+                |       |
+                 window
 
     As the simplified drawing shows, the window has an entrance and an exit surface,
     at which the laser loses in each case `transmittance` of its total power.
@@ -54,14 +64,15 @@ def power_to_irradiance(
 
     :return: Unitful irradiance (W/cm^2)
 
-    Example:
-    --------
-    >>> power = 811 * ureg.mW
-    >>> rep_rate = 1000 * ureg.Hz
-    >>> beam_size = (1.5, 1.6) * ureg.mm
-    >>> beam_dt = 1.355e-8 * ureg.s
-    >>> power_to_irradiance(power, rep_rate, beam_size, beam_dt)
-    <Quantity(3175268.36, 'watt / centimeter ** 2')>
+    :Example:
+
+        >>> power = 811 * ureg.mW
+        >>> rep_rate = 1000 * ureg.Hz
+        >>> beam_size = (1.5, 1.6) * ureg.mm
+        >>> beam_dt = 1.355e-8 * ureg.s
+        >>> power_to_irradiance(power, rep_rate, beam_size, beam_dt)
+        <Quantity(3175268.36, 'watt / centimeter ** 2')>
+
     """
     power = ut.assume_units(power, ureg.mW)
     rep_rate = ut.assume_units(rep_rate, ureg.Hz)

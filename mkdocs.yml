@@ -1,0 +1,64 @@
+site_name: Reto's tools
+
+theme:
+  name: material
+  features:
+    - content.code.copy
+    - content.code.select
+    - navigation.footer
+  palette:
+    # Palette toggle for dark mode
+    - scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+    # Palette toggle for light mode
+    - scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+# site_url: https://.readthedocs.io
+repo_url: https://github.com/trappitsch/rttools
+site_author: Reto Trappitsch
+
+markdown_extensions:
+  - admonition
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.arithmatex:
+      generic: true
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: sphinx
+            show_symbol_type_heading: true
+            show_symbol_type_toc: true
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+nav:
+  - Home: index.md
+  - API:
+    - Nucleosynthesis Models:
+      - FRUITY: nucmod/fruity.md
+      - Lugaro: nucmod/lugaro.md
+    - RIMS:
+      - Converters: rims/converters.md
+      - Saturation Curves: rims/saturation_curves.md
+    - LaTeX: latex.md
+    - Peirce: peirce.md
+    - Plot: plot.md
+    - Utilities: utils.md

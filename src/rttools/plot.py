@@ -1,4 +1,11 @@
-"""Some tools to make plotting with MPL easier."""
+"""Some tools to make plotting with MPL easier.
+
+Import as:
+
+```python
+from rttools import plot
+```
+"""
 
 import matplotlib as mpl
 import numpy as np

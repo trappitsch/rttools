@@ -1,11 +1,20 @@
-"""Handler for FRUITY model files (from http://fruity.oa-teramo.inaf.it/)."""
+"""Handler for FRUITY model files (from http://fruity.oa-teramo.inaf.it/).
+
+This module provides some functions to work with the FRUITY nucleosynthesis models.
+
+Import as:
+
+```python
+from rttools.nucmod import fruity
+```
+"""
 
 from pathlib import Path
 from typing import Tuple, Union
 
-from iniabu import ini
 import matplotlib.pyplot as plt
 import pandas as pd
+from iniabu import ini
 
 from rttools.utils import reduce_decimal
 

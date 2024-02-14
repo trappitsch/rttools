@@ -1,10 +1,17 @@
-"""Model reader for Maria Lugaro's AGB star files."""
+"""Model reader for Maria Lugaro's AGB star files.
+
+Import as:
+
+```python
+from rttools.nucmod import lugaro
+```
+"""
 
 from pathlib import Path
 from typing import List, Tuple
 
-import pandas as pd
 import matplotlib.pyplot as plt
+import pandas as pd
 
 from rttools.latex import exp_notation
 from rttools.utils import reduce_decimal
