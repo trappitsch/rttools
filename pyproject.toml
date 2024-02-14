@@ -35,6 +35,7 @@ dev-dependencies = [
 
 [tool.rye.scripts]
 test = "pytest"
+test_cov = "pytest --cov --cov-report xml"
 
 [tool.hatch.metadata]
 allow-direct-references = true
