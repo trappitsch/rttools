@@ -4,6 +4,24 @@ import pytest
 import numpy as np
 
 import rttools.utils as utils
+from rttools import ureg
+
+
+def test_assume_units():
+    """If no units are given, assume default standard units."""
+    assert utils.assume_units(3, ureg.mW) == 3 * ureg.mW
+    assert utils.assume_units(3 * ureg.W, ureg.mW) == 3000 * ureg.mW
+    assert utils.assume_units(60 * ureg.min, ureg.s) == 1 * ureg.h
+
+
+@pytest.mark.parametrize("in_arr", [np.array([1, 2, 3, 4]), [1, 2, 3, 4], (1, 2, 3, 4)])
+def test_assume_units_array(in_arr):
+    """Assume units for an array of values."""
+    unit = ureg.mW
+    out = utils.assume_units(in_arr, unit)
+    for item in out:
+        assert isinstance(item, ureg.Quantity)
+        assert item.units == unit
 
 
 def test_kron_delta():

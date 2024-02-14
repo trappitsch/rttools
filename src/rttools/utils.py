@@ -5,6 +5,25 @@ from typing import Any
 
 import numpy as np
 
+from rttools import ureg
+
+
+def assume_units(value: Any, unit: ureg.Quantity) -> Any:
+    """Take a vale with or without unit and return it with a unit.
+
+    If a value is given without units, assume the given units.
+    If the value is given with units, return it.
+
+    :param value: Value to be converted
+    :param unit: Unit to be assumed
+
+    :return: Value with assumed units
+    """
+    if isinstance(value, ureg.Quantity):
+        return value
+    else:
+        return value * unit
+
 
 def kron_delta(ind1, ind2):
     """Calculate Kronecker-delta for variables i,j.
