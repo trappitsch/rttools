@@ -1,43 +1,50 @@
+[project]
+name = "rttools"
+version = "0.1.0"
+description = "Reto's tools for small tasks here and there!"
+readme = "README.md"
+authors = [
+    { name = "Reto Trappitsch", email = "reto@galactic-forensics.space" }
+]
+dependencies = [
+    "numpy>=1.26.4",
+    "iniabu>=1.1.2",
+    "matplotlib>=3.8.2",
+    "pandas>=2.2.0",
+    "scipy>=1.12.0",
+    "pyarrow>=15.0.0",
+]
+requires-python = ">= 3.8"
+license = { text = "MIT" }
+
+[project.scripts]
+
+[project.urls]
+Homepage = "https://github.com/trappitsch/rttools"
+
 [build-system]
-requires = ["flit_core >=2,<4"]
-build-backend = "flit_core.buildapi"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
-[tool.flit.metadata]
-module = "rttools"
-author = "Reto Trappitsch"
-author-email = "reto@galactic-forensics.space"
-home-page = "https://github.com/trappitsch/rttools"
-requires = ["numpy"]
-requires-python=">=3.6"
-description-file="README.md"
-
-[tool.flit.metadata.requires-extra]
-dev = [
-    "darglint>=1.5.1",
-    "flake8",
-    "flake8-bandit",
-    "flake8-black",
-    "flake8-bugbear",
-    "flake8-docstrings",
-    "flake8-import-order",
-]
-doc = [
-    "sphinx",
-    "sphinx_rtd_theme"
-]
-test = [
-    "pytest",
-    "pytest-cov",
-    "pytest-mock",
-    "pytest-sugar"
+[tool.rye]
+managed = true
+dev-dependencies = [
+    "pytest>=8.0.0",
+    "pytest-cov>=4.1.0",
 ]
 
-[tool.flit.metadata.urls]
-Documentation = "https://github.com/trappitsch/rttools"
+[tool.rye.scripts]
+test = "pytest"
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/rttools"]
 
 [tool.pytest.ini_options]
-minversion = "6.0"
 addopts = "-v --cov=rttools"
 testpaths = [
     "tests"
 ]
+filterwarnings = 'ignore:datetime.datetime.utcfromtimestamp\(\) is deprecated:DeprecationWarning'  # 3rd party

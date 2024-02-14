@@ -4,15 +4,16 @@ from typing import Tuple, Union
 
 from iniabu import ini
 
+
 def error_formatting(value: float, unc: float, prec: int) -> str:
     """Take a value and its uncertainty and express is as a formatted LaTeX string.
 
     Scientific notation is assumed. As an example, if value is 0.0002153 and uncertainty
-    is 0.00002, at a precision of 3 the formated string would be:
-    '$(2.15 \pm 0.20) \times 10^{-4}$'
+    is 0.00002, at a precision of 3 the formatted string would be:
+    '$(2.15 \\pm 0.20) \\times 10^{-4}$'
 
     :param value: Value to be given
-    :param unc: Uncertaintiy of the value
+    :param unc: Uncertainty of the value
     :param prec: Significant digits.
 
     :return: LaTeX formatted string, see example above.
@@ -22,9 +23,9 @@ def error_formatting(value: float, unc: float, prec: int) -> str:
     value_str = f"{value*10**(-exponent):.{prec}f}"
     unc_str = f"{unc*10**(-exponent):.{prec}f}"
     if exponent != 0:
-        ret_str = f"$({value_str} \pm {unc_str}) \\times 10^{{{exponent}}}$"
+        ret_str = f"$({value_str} \\pm {unc_str}) \\times 10^{{{exponent}}}$"
     else:
-        ret_str = f"${value_str} \pm {unc_str}$"
+        ret_str = f"${value_str} \\pm {unc_str}$"
     return ret_str
 
 
@@ -124,7 +125,7 @@ def split_iso(iso: str) -> Tuple[str, Union[int, str]]:
     :return: Isotope name, mass number (as int if possible)
     """
     # transform to correct format if necessary
-    if not "-" in iso:
+    if "-" not in iso:
         iso = iso_transformer(iso)
 
     ele, aa = iso.split("-")

@@ -1,12 +1,6 @@
 """Tools for my own research projects - an assortment."""
 
 # imports
-from . import latex
-from . import linreg
-from . import nucmod
-from . import peirce
-from . import plot
-from . import utils
 
 # Package information
 __version__ = "0.0.1"

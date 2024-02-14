@@ -1,8 +1,6 @@
 """Function tests for lugaro reader."""
 
-from pathlib import Path
 
-import pandas as pd
 import pytest
 
 from rttools.nucmod import lugaro

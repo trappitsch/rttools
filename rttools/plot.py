@@ -1,7 +1,6 @@
 """Some tools to make plotting with MPL easier."""
 
 import matplotlib as mpl
-import matplotlib.pyplot as plt
 import numpy as np
 
 
@@ -18,7 +17,7 @@ def corr_error_bars(
     color: str = "tab:blue",
     label: str = None,
     zorder: int = 10,
-    **kwargs
+    **kwargs,
 ) -> None:
     """Plot correlated error bars on a given axes.
 
@@ -52,21 +51,21 @@ def corr_error_bars(
         sig_y = yerr[it]
         sig_xy = rho[it] * sig_x * sig_y
         # trace and determinat of covariance matrix
-        tr_cov = sig_x ** 2 + sig_y ** 2
-        det_cov = sig_x ** 2 * sig_y ** 2 - sig_xy ** 2
+        tr_cov = sig_x**2 + sig_y**2
+        det_cov = sig_x**2 * sig_y**2 - sig_xy**2
         # calculate the eigenvalues
         lam1 = tr_cov / 2 + np.sqrt((tr_cov / 2) ** 2 - det_cov)
         lam2 = tr_cov / 2 - np.sqrt((tr_cov / 2) ** 2 - det_cov)
 
         # calculate the rotation of the error bars
         if sig_xy == 0:
-            determinator = lam1 - sig_x ** 2.0
+            determinator = lam1 - sig_x**2.0
             if np.isclose(determinator, 0):  # to check for numerical issues
                 phi_x = 0  # 0 divided by infinity
             else:
                 phi_x = np.pi / 2  # not 0 divided by infinity
         else:
-            phi_x = np.arctan((lam1 - sig_x ** 2) / sig_xy)
+            phi_x = np.arctan((lam1 - sig_x**2) / sig_xy)
         phi_y = phi_x + np.pi / 2
 
         # calculate delta x and delta y for x error bar:

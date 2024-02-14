@@ -1,6 +1,5 @@
 """Tests to read Maria Lugaro's files."""
 
-from pathlib import Path
 
 import pandas as pd
 import pytest

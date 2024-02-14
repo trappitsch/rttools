@@ -72,7 +72,7 @@ def label_latex_mass(fname: str, prec: int = 1) -> str:
     :return: LaTeX label.
     """
     m, _, _, _ = label_parser(fname)
-    return f"${reduce_decimal(m, prec)}\,M_{{\\odot}}$"
+    return f"${reduce_decimal(m, prec)}\\,M_{{\\odot}}$"
 
 
 def label_latex_mass_z(fname: str, prec: int = 2) -> str:
@@ -85,8 +85,8 @@ def label_latex_mass_z(fname: str, prec: int = 2) -> str:
     """
     m, z, _, _ = label_parser(fname)
     return (
-        f"${reduce_decimal(m, prec)}\,M_{{\\odot}}$, "
-        f"${reduce_decimal(z, prec)}\,Z_{{\\odot}}$"
+        f"${reduce_decimal(m, prec)}\\,M_{{\\odot}}$, "
+        f"${reduce_decimal(z, prec)}\\,Z_{{\\odot}}$"
     )
 
 
@@ -100,8 +100,8 @@ def label_latex_mass_z_pocket(fname: str, prec: int = 2) -> str:
     """
     m, z, _, pocket = label_parser(fname)
     return (
-        f"${reduce_decimal(m, prec)}\,M_{{\\odot}}$, "
-        f"${reduce_decimal(z, prec)}\,Z_{{\\odot}}$, "
+        f"${reduce_decimal(m, prec)}\\,M_{{\\odot}}$, "
+        f"${reduce_decimal(z, prec)}\\,Z_{{\\odot}}$, "
         f"{pocket}"
     )
 
@@ -116,10 +116,10 @@ def label_latex_mass_z_pocket_rot(fname: str, prec: int = 2) -> str:
     """
     m, z, rot, pocket = label_parser(fname)
     return (
-        f"${reduce_decimal(m, prec)}\,M_{{\\odot}}$, "
-        f"${reduce_decimal(z, prec)}\,Z_{{\\odot}}$, "
+        f"${reduce_decimal(m, prec)}\\,M_{{\\odot}}$, "
+        f"${reduce_decimal(z, prec)}\\,Z_{{\\odot}}$, "
         f"{pocket}, "
-        f"IRV: ${reduce_decimal(rot, prec)}\,$km\,s$^{{-1}}$"
+        f"IRV: ${reduce_decimal(rot, prec)}\\,$km\\,s$^{{-1}}$"
     )
 
 
@@ -169,6 +169,7 @@ def make_fruity_isoname(iso: str) -> str:
     iso = ini.iso[iso].name.split("-")
     iso_fruity = iso[0] + iso[1][-2:]
     return iso_fruity
+
 
 def plot_mod(
     ax: plt.Axes,

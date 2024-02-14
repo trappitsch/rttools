@@ -19,7 +19,7 @@ def label_latex_mass(fname: str, prec: int = 1) -> str:
     :return: LaTeX label.
     """
     m, _, _, _ = label_parser(fname)
-    return f"${reduce_decimal(m, prec)}\,M_{{\\odot}}$"
+    return f"${reduce_decimal(m, prec)}\\,M_{{\\odot}}$"
 
 
 def label_latex_mass_z(fname: str, prec: int = 2) -> str:
@@ -32,8 +32,8 @@ def label_latex_mass_z(fname: str, prec: int = 2) -> str:
     """
     m, z, _, _ = label_parser(fname)
     return (
-        f"${reduce_decimal(m, prec)}\,M_{{\\odot}}$, "
-        f"${reduce_decimal(z, prec)}\,Z_{{\\odot}}$"
+        f"${reduce_decimal(m, prec)}\\,M_{{\\odot}}$, "
+        f"${reduce_decimal(z, prec)}\\,Z_{{\\odot}}$"
     )
 
 
@@ -48,9 +48,9 @@ def label_latex_mass_z_pmz(fname: str, prec: int = 2) -> str:
     m, z, pmz, st = label_parser(fname)
 
     return (
-        f"${reduce_decimal(m, prec)}\,M_{{\\odot}}$, "
-        f"${reduce_decimal(z, prec)}\,Z_{{\\odot}}$, "
-        f"PMZ: {exp_notation(pmz, prec)}$\,M_{{\\odot}}$"
+        f"${reduce_decimal(m, prec)}\\,M_{{\\odot}}$, "
+        f"${reduce_decimal(z, prec)}\\,Z_{{\\odot}}$, "
+        f"PMZ: {exp_notation(pmz, prec)}$\\,M_{{\\odot}}$"
     )
 
 
