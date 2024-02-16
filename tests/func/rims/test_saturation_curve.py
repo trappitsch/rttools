@@ -26,7 +26,6 @@ def test_saturation_curve_unitful_no_err():
     xdat = XDAT * ureg.W / ureg.cm**2
     ydat = YDAT * ureg.counts
     _ = sc.saturation_curve(xdat, ydat, darkmode=True, title="test")
-    _.savefig("/home/reto/Desktop/test.pdf")
 
 
 def test_saturation_curve_yerr():
