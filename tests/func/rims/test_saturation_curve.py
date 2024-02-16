@@ -25,7 +25,8 @@ def test_saturation_curve_unitful_no_err():
     """Create saturation curve plot with unitful data and no error bars."""
     xdat = XDAT * ureg.W / ureg.cm**2
     ydat = YDAT * ureg.counts
-    _ = sc.saturation_curve(xdat, ydat, darkmode=True)
+    _ = sc.saturation_curve(xdat, ydat, darkmode=True, title="test")
+    _.savefig("/home/reto/Desktop/test.pdf")
 
 
 def test_saturation_curve_yerr():

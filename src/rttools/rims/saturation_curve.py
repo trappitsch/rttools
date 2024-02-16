@@ -25,6 +25,7 @@ def saturation_curve(
     ylabel: str = "Signal",
     fit: bool = True,
     darkmode: bool = False,
+    title: str = None,
 ) -> plt.Figure:
     """Plot a saturation curve from data.
 
@@ -43,6 +44,7 @@ def saturation_curve(
     :param fit: If True, fit a Letokhov saturation curve to the data, plot it,
         and mark up with fit parameters.
     :param darkmode: If True, use darkmode for the plot.
+    :param title: Title for the plot
 
     :return: Matplotlib axis
     """
@@ -160,6 +162,9 @@ def saturation_curve(
             ma="left",
             bbox=dict(boxstyle="round", facecolor="None", alpha=0.7, edgecolor=col_red),
         )
+
+    if title:
+        ax.set_title(title)
 
     fig.tight_layout()
     return fig
