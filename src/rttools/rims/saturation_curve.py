@@ -23,7 +23,8 @@ def saturation_curve(
     yunit: Union[ureg.Quantity, str] = None,
     xlabel: str = None,
     ylabel: str = "Signal",
-    fit=True,
+    fit: bool = True,
+    darkmode: bool = False,
 ) -> plt.Figure:
     """Plot a saturation curve from data.
 
@@ -41,6 +42,7 @@ def saturation_curve(
         Infers "Power" if xunit is in W or "Irradiance" if xunit is in W/cm^2.
     :param fit: If True, fit a Letokhov saturation curve to the data, plot it,
         and mark up with fit parameters.
+    :param darkmode: If True, use darkmode for the plot.
 
     :return: Matplotlib axis
     """
@@ -84,6 +86,15 @@ def saturation_curve(
     else:
         yerr = None
 
+    if darkmode:
+        plt.style.use("dark_background")
+        col_blue = "lightblue"
+        col_red = "lightsalmon"
+    else:
+        plt.style.use("default")
+        col_blue = "tab:blue"
+        col_red = "darkred"
+
     # create the figure
     fig, ax = plt.subplots(1, 1)
 
@@ -97,7 +108,7 @@ def saturation_curve(
         label="Data",
         linestyle="None",
         linewidth=0.5,
-        color="tab:blue",
+        color=col_blue,
     )
 
     # Axes labels
@@ -129,7 +140,7 @@ def saturation_curve(
         xfit = np.linspace(xdata.min(), xdata.max(), 1000)
         yfit = _letokhov(xfit, ni, nmax, isat)
 
-        ax.plot(xfit, yfit, label="Fit", color="darkred", linestyle="-")
+        ax.plot(xfit, yfit, label="Fit", color=col_red, linestyle="-")
         ax.legend(loc="upper left")
 
         fit_string = "Fit parameters:\n"
@@ -142,14 +153,12 @@ def saturation_curve(
             0.96,
             0.05,
             fit_string,
-            color="darkred",
+            color=col_red,
             transform=ax.transAxes,
             va="bottom",
             ha="right",
             ma="left",
-            bbox=dict(
-                boxstyle="round", facecolor="white", alpha=0.7, edgecolor="darkred"
-            ),
+            bbox=dict(boxstyle="round", facecolor="None", alpha=0.7, edgecolor=col_red),
         )
 
     fig.tight_layout()
