@@ -156,6 +156,7 @@ def saturation_curve(
             0.05,
             fit_string,
             color=col_red,
+            alpha=1,
             transform=ax.transAxes,
             va="bottom",
             ha="right",
