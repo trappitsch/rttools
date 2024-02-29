@@ -143,7 +143,7 @@ def saturation_curve(
         yfit = _letokhov(xfit, ni, nmax, isat)
 
         ax.plot(xfit, yfit, label="Fit", color=col_red, linestyle="-")
-        ax.legend(loc="upper left", framealpha=1)
+        ax.legend(loc="upper left", facecolor="None")
 
         fit_string = "Fit parameters:\n"
         fit_string += (
