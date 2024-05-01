@@ -129,7 +129,7 @@ def saturation_curve(
     # fit a curve if desired
     if fit:
         # take an initial guess from the data
-        initial_guess = [0, 1, np.max(xdata) / 2]
+        initial_guess = [0, 10, np.max(xdata) / 2]
 
         popt, pcov = curve_fit(
             _letokhov,
