@@ -1,6 +1,5 @@
 """Function tests for lugaro reader."""
 
-
 import pytest
 
 from rttools.nucmod import lugaro

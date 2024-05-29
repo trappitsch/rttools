@@ -1,6 +1,5 @@
 """Tests to read Maria Lugaro's files."""
 
-
 import pandas as pd
 import pytest
 
