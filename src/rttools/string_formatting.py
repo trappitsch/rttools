@@ -49,6 +49,12 @@ class StringFmt:
         # replace {\\circ} with °
         string = string.replace(r"{\circ}", "°")
 
+        # replace \, with a space
+        string = string.replace(r"\,", " ")
+
+        # replace \times with ×
+        string = string.replace(r"\times", "×")
+
         return string
 
     @property
