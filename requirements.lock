@@ -6,19 +6,20 @@
 #   features: []
 #   all-features: true
 #   with-sources: false
+#   generate-hashes: false
 
 -e file:.
-contourpy==1.2.0
+contourpy==1.2.1
     # via matplotlib
 cycler==0.12.1
     # via matplotlib
-fonttools==4.48.1
+fonttools==4.52.4
     # via matplotlib
 iniabu==1.1.2
     # via rttools
 kiwisolver==1.4.5
     # via matplotlib
-matplotlib==3.8.2
+matplotlib==3.9.0
     # via rttools
 numpy==1.26.4
     # via contourpy
@@ -28,28 +29,28 @@ numpy==1.26.4
     # via pyarrow
     # via rttools
     # via scipy
-packaging==23.2
+packaging==24.0
     # via matplotlib
-pandas==2.2.0
+pandas==2.2.2
     # via rttools
-pillow==10.2.0
+pillow==10.3.0
     # via matplotlib
 pint==0.23
     # via rttools
-pyarrow==15.0.0
+pyarrow==16.1.0
     # via rttools
-pyparsing==3.1.1
+pyparsing==3.1.2
     # via matplotlib
-python-dateutil==2.8.2
+python-dateutil==2.9.0.post0
     # via matplotlib
     # via pandas
 pytz==2024.1
     # via pandas
-scipy==1.12.0
+scipy==1.13.1
     # via rttools
 six==1.16.0
     # via python-dateutil
-typing-extensions==4.9.0
+typing-extensions==4.12.0
     # via pint
 tzdata==2024.1
     # via pandas

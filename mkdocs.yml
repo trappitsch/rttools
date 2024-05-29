@@ -61,4 +61,5 @@ nav:
     - LaTeX: latex.md
     - Peirce: peirce.md
     - Plot: plot.md
+    - String formatting: string_formatting.md
     - Utilities: utils.md

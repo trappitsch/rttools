@@ -1,6 +1,6 @@
 [project]
 name = "rttools"
-version = "0.1.0"
+version = "0.2.0"
 description = "Reto's tools for small tasks here and there!"
 readme = "README.md"
 authors = [
