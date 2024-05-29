@@ -24,6 +24,8 @@ def test_identity():
         ["^3P{\\circ}", "<sup>3</sup>P°"],
         [r"5 \times 10^{7}", "5 × 10<sup>7</sup>"],
         [r"5\,\times 10^{7}", "5 × 10<sup>7</sup>"],
+        [r"$^{3}$F$_{2}$", "<sup>3</sup>F<sub>2</sub>"],
+        [None, None],
     ],
 )
 def test_html(cases):

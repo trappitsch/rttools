@@ -31,6 +31,9 @@ class StringFmt:
     def html(self):
         string = self._string
 
+        if not string:
+            return None
+
         # replace unescaped $ with nothing
         string = re.sub(r"(?<!\\)\$", "", string)
 
