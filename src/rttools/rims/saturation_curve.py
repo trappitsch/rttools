@@ -126,6 +126,10 @@ def saturation_curve(
         else:
             ax.set_ylabel(f"{ylabel} (arb)")
 
+    # if there is a zero in errors, choose 100 times lower than lowest sigma
+    if yerr is not None:
+        yerr[yerr == 0] = np.min(yerr[yerr != 0]) / 100
+
     # fit a curve if desired
     if fit:
         # take an initial guess from the data
@@ -138,6 +142,7 @@ def saturation_curve(
             p0=initial_guess,
             sigma=yerr,
         )
+
         ni, nmax, isat = popt
         xfit = np.linspace(xdata.min(), xdata.max(), 1000)
         yfit = _letokhov(xfit, ni, nmax, isat)
