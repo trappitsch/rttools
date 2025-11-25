@@ -27,6 +27,7 @@ dev = [
     "mkdocs>=1.5.3",
     "mkdocs-material>=9.5.9",
     "mkdocstrings[python]>=0.24.0",
+    "hypothesis>=6.148.1",
 ]
 
 [project.urls]
