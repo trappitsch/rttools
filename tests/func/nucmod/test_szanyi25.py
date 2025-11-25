@@ -51,7 +51,7 @@ def test_szanyi25_co_ratio():
 
     assert len(co_ratio) == 29
     assert all(val >= 0. for val in co_ratio)
-    pytest.approx(co_ratio[2], 0.4700536385838516)  # specific value check
+    pytest.approx(co_ratio.iloc[2], 0.4700536385838516)  # specific value check
 
 def test_szanyi25_delta_mo():
     """Calculate delta values for Mo isotopes."""
