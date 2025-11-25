@@ -55,6 +55,7 @@ nav:
     - Nucleosynthesis Models:
       - FRUITY: nucmod/fruity.md
       - Lugaro: nucmod/lugaro.md
+      - Szanyi 2025: nucmod/szanyi25.md
     - RIMS:
       - Converters: rims/converters.md
       - Saturation Curves: rims/saturation_curves.md

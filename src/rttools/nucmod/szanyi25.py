@@ -50,7 +50,21 @@ def get_closest_model(mass: float, metallicity: float, rate_set: int = 2) -> Pat
 
 
 class Szanyi25Reader:
-    """Reader for Szanyi et al. (2025) nucleosynthesis models."""
+    """Reader for Szanyi et al. (2025) nucleosynthesis models.
+
+    Load a given mass, metallicity, and rate set model and provide methods to access the data.
+    This routine will load the closest available model. Please see the example on how to check which model was loaded. 
+
+    Example usage:
+    ```python
+    from rttools.nucmod.szanyi25 import Szanyi25Reader
+
+    model = Szanyi25Reader(mass=3.0, metallicity=0.014, rate_set=2)
+
+    # print mass, metallicity and rate set of the loaded model
+    print(f"Loaded model: mass={model.mass}, z={model.z}, rate_set={model.rate_set}")
+    ```
+    """
 
     def __init__(self, mass: float, metallicity: float, rate_set: int = 2):
         """Initialize the reader with the closest model file.
